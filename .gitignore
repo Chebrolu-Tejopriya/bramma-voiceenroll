@@ -1,0 +1,9 @@
+.netlify/
+.vercel/
+netlify-public/
+Bramma-voice-demo/
+*.zip
+node_modules/
+__pycache__/
+.env
+.env.*

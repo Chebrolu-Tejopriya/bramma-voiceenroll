@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bramma · Voice motion demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="studio">
+  <div class="notes-bar"><button id="openNotes" class="notes-button" aria-haspopup="dialog">Developer notes <span aria-hidden="true">↗</span></button></div>
+  <aside class="direction" aria-label="Demo controls">
+    <div class="controls">
+      <div class="segmented"><button id="demo" class="selected">Demo voice</button><button id="mic" title="Speech recognition may use the browser's online service">My microphone</button></div>
+      <div class="transport"><button id="replay">Replay</button><button id="pause">Pause</button></div>
+      <p id="inputNote">Demo reading: the yellow highlight follows one word at a time.</p>
+    </div>
+  </aside>
+  <section class="preview" aria-label="Mobile animation preview">
+    <div class="phone-wrap"><div class="phone">
+      <div class="status"><b>9:41</b><img src="assets/status.svg" alt="Signal, Wi-Fi and battery"></div>
+      <header><button class="back" aria-label="Restart preview"><img src="assets/back.svg" alt=""></button><span>Voice Identification</span></header>
+      <div class="content"><div class="heading"><h2>Read this out loud</h2><span><img src="assets/room.svg" alt=""> Bramma-001</span></div>
+        <p class="description">Bramma uses your voice to identify you in meetings and accurately assign your action items.</p>
+        <div class="script" id="script"><p>Hi, I'm setting up my voice on Bramma so it knows who's talking in our meetings. I'll just speak normally for about a minute.</p><p>Most of my day is meetings: a quick standup in the morning, a planning call after lunch, and usually one conversation that runs longer than anyone planned. We talk about what shipped, what slipped, and who's picking up what next.</p><p>Last week we moved the launch to the fourteenth, cut the budgetHi, I'm setting up my voice on Bramma so it knows who's talking in our meetings. I'll just speak normally for about a minute.</p><p>Most of my day is meetings: a quick standup in the morning, a planning call after lunch, and usually one conversation that runs longer than anyone planned. We talk about what shipped, what slipped, and who's picking up what next.</p></div>
+      </div>
+      <div class="recording-surface" aria-hidden="true"><img class="curve base" src="assets/base.svg" alt=""><img class="curve glow" src="assets/glow.svg" alt=""><img class="curve edge" src="assets/edge-long.svg" alt=""></div>
+      <div class="recording-controls"><div class="listen-label" id="listenLabel">Ready when you are</div><div id="timer">01:20</div><button id="record"><span class="stop-icon"><img src="assets/stop.svg" alt=""></span><span id="recordText">Start Recording</span></button></div>
+      <div class="success" id="success"><div class="check">✓</div><h2>Your voice is ready</h2><p>Bramma can now recognize you<br>in your meetings.</p><button id="again">Replay demo</button><small>Demo completion</small></div>
+    </div></div>
+    <div class="preview-caption"><span class="live-dot"></span><span id="caption">READY · GENTLE BREATH</span><span>390 × 846</span></div>
+  </section>
+</main>
+<dialog id="developerNotes" class="notes-dialog" aria-labelledby="notesTitle">
+  <div class="notes-header"><div><p class="notes-kicker">BRAMMA / ANIMATION HANDOFF</p><h2 id="notesTitle">Developer notes</h2></div><button id="closeNotes" class="notes-close" aria-label="Close developer notes">&times;</button></div>
+  <div class="notes-body">
+    <p class="notes-intro">A thin gradient that listens: short during silence, longer during speech. The curve moves with a subtle drift.</p>
+    <h3>Gradient length</h3>
+    <ul><li>Keep the gradient centered and preserve its original stroke thickness.</li><li>Expand to a maximum of <strong>75% of the visible curve</strong>, leaving 12.5% clear at each side.</li><li>Use voice energy and sustained speech activity to control length. Speech activity is an audio-density cue, not measured words per minute.</li><li>Use a horizontal CSS mask with 6% fading tails. Change its length only; add no stroke dilation, blur, or dynamic glow.</li></ul>
+    <h3>Motion and timing</h3>
+    <div class="notes-values"><div><span>Audio smoothing</span><strong>120 ms rise / 380 ms release</strong></div><div><span>Gradient smoothing</span><strong>240 ms expand / 420 ms contract</strong></div><div><span>Curve drift</span><strong>Up to 1.8 px / 550 ms smoothing</strong></div><div><span>Idle breath</span><strong>0.35 px / 7.2 second cycle</strong></div></div>
+    <p>Use <code>value += (target - value) * (1 - exp(-dt / tau))</code>, with dt and tau in seconds. This keeps motion consistent across frame rates and avoids overshoot. Translate all curve layers together; keep the timer and button still. Preserve the breathing phase between states.</p>
+    <h3>Word highlighting</h3>
+    <p>Highlight one word at a time with <code>#F8EF8D</code> at 40% opacity. Switch the highlight without a fade and scroll the paragraph internally to keep the current word visible. Pause freezes the reading position; Replay returns to the first word.</p>
+    <h3>States and accessibility</h3>
+    <p>Ready → Listening → Processing → Complete. Settle gently when speech stops. Respect reduced motion by keeping the curve and gradient length still, while preserving word highlighting and the timer.</p>
+    <h3>Implementation files</h3>
+    <p><a href="app.js" target="_blank" rel="noopener"><code>app.js</code></a> contains the audio analysis, smoothing and state logic. <a href="style.css" target="_blank" rel="noopener"><code>style.css</code></a> contains the gradient mask. <a href="assets/edge-long.svg" target="_blank" rel="noopener"><code>assets/edge-long.svg</code></a> preserves the original edge geometry with a gold source; the CSS mask supplies its animated gradient.</p>
+    <h3>Demo and production</h3>
+    <p>Demo voice uses scripted word timings. Microphone mode uses local audio levels and browser speech recognition where available; recognition may use the browser provider’s online service. Voice profile creation and completion are simulated. Connect real completion, retry and error states to your backend.</p>
+  </div>
+  <div class="notes-footer"><a href="MOTION.md" download>Download full handoff (.md)</a><button id="doneNotes">Done</button></div>
+</dialog>
+<script src="app.js"></script>
+<script src="notes.js"></script>
+</body></html>

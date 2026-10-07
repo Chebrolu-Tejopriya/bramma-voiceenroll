@@ -1,0 +1,23 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="441" height="153" viewBox="0 0 441 153" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 61">
+<mask id="mask0_0_173" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="441" height="153">
+<path id="Vector 9801" d="M441 81.1205C441 -30.6476 0 -23.3714 0 81.12V153H441V81.1205Z" fill="#F5F5F5"/>
+</mask>
+<g mask="url(#mask0_0_173)">
+<g id="Vector 9800" filter="url(#filter0_f_0_173)">
+<path d="M-8 79.8466C-8 -24.6448 433 -31.9211 433 79.8471" stroke="url(#paint0_linear_0_173)" stroke-width="2"/>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_0_173" x="-21" y="-14.2734" width="467" height="106.121" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="6" result="effect1_foregroundBlur_0_173"/>
+</filter>
+<linearGradient id="paint0_linear_0_173" x1="207" y1="-1.27344" x2="207" y2="39.4617" gradientUnits="userSpaceOnUse">
+<stop stop-color="#AA9D10"/>
+<stop offset="0.4554" stop-color="#F5F5F5"/>
+</linearGradient>
+</defs>
+</svg>
