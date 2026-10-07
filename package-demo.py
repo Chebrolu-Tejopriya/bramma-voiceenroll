@@ -5,10 +5,17 @@ import mimetypes
 import re
 import shutil
 import zipfile
+import json
 
 root = Path(__file__).resolve().parent
 output = root / 'netlify-public'
 output.mkdir(exist_ok=True)
+
+# A bundled source map keeps the code viewer usable offline without fetch/CORS.
+source_names = ['app.js', 'style.css', 'index.html', 'notes.js', 'assets/edge-long.svg', 'MOTION.md']
+source_files = {name: (root / name).read_text(encoding='utf-8') for name in source_names}
+(root / 'code-files.js').write_text(
+    'window.BRAMMA_SOURCE_FILES = ' + json.dumps(source_files, ensure_ascii=True) + ';\n', encoding='utf-8')
 
 def data_url(relative_path):
     path = root / relative_path
@@ -27,7 +34,7 @@ for script in ['app.js', 'notes.js']:
     html = html.replace(f'<script src="{script}"></script>', '<script>\n' + code + '\n</script>')
 
 # Keep the original source files available through Developer notes.
-for name in ['app.js', 'notes.js', 'style.css', 'MOTION.md']:
+for name in ['app.js', 'notes.js', 'style.css', 'MOTION.md', 'code.html', 'code-viewer.css', 'code-viewer.js', 'code-files.js']:
     shutil.copy2(root / name, output / name)
 shutil.copytree(root / 'assets', output / 'assets', dirs_exist_ok=True)
 (output / 'index.html').write_text(html, encoding='utf-8')
@@ -42,7 +49,7 @@ assert 'src="assets/' not in html
 assert "url('assets/" not in html
 assert '<script src=' not in html
 assert '<link rel="stylesheet"' not in html
-assert 'href="app.js"' in html
+assert 'href="code.html#app.js"' in html
 assert 'data:image/svg+xml;base64,' in html
 assert 'data:font/ttf;base64,' in html
 print('PASS: portable HTML includes the original curve SVGs, icons, fonts, styles and animation scripts.')

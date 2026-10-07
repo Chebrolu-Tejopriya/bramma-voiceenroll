@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bramma · Source viewer</title><link rel="stylesheet" href="code-viewer.css"></head>
+<body>
+<header class="titlebar"><a href="index.html">← Back to demo</a><span>Bramma / Developer source</span><a href="https://github.com/Chebrolu-Tejopriya/bramma-voiceenroll" target="_blank" rel="noopener">GitHub ↗</a></header>
+<main class="editor">
+  <aside class="explorer"><h2>EXPLORER</h2><p>⌄ BRAMMA VOICE ENROLLMENT</p><nav id="fileList" aria-label="Source files"></nav></aside>
+  <section class="workspace" aria-label="Code viewer">
+    <div class="tabs" id="fileTabs" aria-label="Open file"></div>
+    <div class="toolbar"><span id="breadcrumb"></span><div><button id="copyCode">Copy code</button><button id="downloadCode">Download file</button></div></div>
+    <p id="fileError" hidden></p>
+    <div class="code-scroll" tabindex="0" aria-label="Scrollable source code"><pre id="codeContent"></pre></div>
+    <footer class="statusbar"><span id="languageLabel"></span><span id="lineCount"></span><span id="copyStatus" role="status" aria-live="polite">Read only · Select or copy the complete file</span></footer>
+  </section>
+</main>
+<script src="code-files.js"></script><script src="code-viewer.js"></script>
+</body></html>

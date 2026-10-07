@@ -51,6 +51,7 @@ assert(parseFloat(surface.style['--voice-width'])<loudWidth*.5);
 assert(parseFloat(surface.style['--voice-width'])<8.1);
 const html=fs.readFileSync('index.html','utf8'), css=fs.readFileSync('style.css','utf8');
 assert(!html.includes('feMorphology')); assert(!css.includes('drop-shadow')); assert(!html.includes('gradient-pulse'));
+assert(html.includes('href="code.html#app.js"'));assert(html.includes('href="code.html#style.css"'));
 const original=fs.readFileSync('assets/edge.svg','utf8'),extended=fs.readFileSync('assets/edge-long.svg','utf8');
 assert.equal(original.replace(/<linearGradient[\s\S]*?<\/linearGradient>/,''),extended.replace(/<linearGradient[\s\S]*?<\/linearGradient>/,''));
 for(const [,path] of html.matchAll(/(?:src|href)="((?:assets\/|style\.css|app\.js)[^"]*)"/g)) assert(fs.statSync(path).size>0,path);

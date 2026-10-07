@@ -8,6 +8,8 @@ Open `index.html` for the simulated voice demo. For microphone input, serve the 
 
 The thin, centered gradient expands with speech to a maximum of 75% of the visible curve. Movement is a subtle, smoothed drift. The paragraph highlights one word at a time. The Developer notes button provides motion timings and clickable source files.
 
+Source links open `code.html`, a VS Code-style read-only viewer with syntax colors, line numbers, file navigation, Copy code and Download file buttons. The source bundle works offline. Run `python package-demo.py` after source edits to refresh `code-files.js` and the deployment package.
+
 ## Deploy on Vercel
 
 Import this repository. Choose **Other** as the framework preset, leave the root directory at the repository root, disable the build command, and use `.` as the output directory. No package installation is needed. Deploy the complete repository so the `assets` folder is included.
